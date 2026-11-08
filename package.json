@@ -1,0 +1,27 @@
+{
+  "name": "food-ordering-system",
+  "version": "1.0.0",
+  "description": "Full Stack Food Ordering Web Application (React + Node.js + Express + MongoDB)",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix server start\" \"npm --prefix client run dev\" --names \"SERVER,CLIENT\" --prefix-colors \"blue,green\"",
+    "start": "npm --prefix server start",
+    "seed": "npm --prefix server run seed",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install"
+  },
+  "keywords": [
+    "food-ordering",
+    "mern",
+    "react",
+    "tailwind",
+    "mongodb",
+    "express"
+  ],
+  "author": "CraveCraft Team",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
