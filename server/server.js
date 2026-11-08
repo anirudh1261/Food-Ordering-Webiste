@@ -23,20 +23,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Health Check API
-app.get('/api/health', (req, res) => {
+const healthHandler = (req, res) => {
   res.json({
     status: 'online',
     timestamp: new Date().toISOString(),
     service: 'CraveCraft Food Ordering Backend API',
   });
-});
+};
+app.get('/api/health', healthHandler);
+app.get('/health', healthHandler);
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/foods', foodRoutes);
+app.use('/foods', foodRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/categories', categoryRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/orders', orderRoutes);
 app.use('/api/users', userRoutes);
+app.use('/users', userRoutes);
 
 // 404 Route Handler
 app.use('/api/*', (req, res) => {
@@ -59,10 +66,11 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Connect to DB and start server
-const startServer = async () => {
-  await connectDB();
+// Connect to DB eagerly (for both local and serverless)
+connectDB();
 
+// Only start the listener when running locally (not on Vercel)
+if (!process.env.VERCEL) {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`=======================================================`);
     console.log(`🍔 CraveCraft Backend API Server Running on port ${PORT}`);
@@ -70,8 +78,6 @@ const startServer = async () => {
     console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);
     console.log(`=======================================================`);
   });
-};
-
-startServer();
+}
 
 export default app;
