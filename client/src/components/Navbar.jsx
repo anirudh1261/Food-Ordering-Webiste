@@ -167,10 +167,10 @@ const Navbar = () => {
                 className="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-white border border-slate-200/80 hover:border-slate-300 transition-all shadow-xs"
               >
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary-500 to-amber-400 text-white flex items-center justify-center font-bold text-xs uppercase shadow-inner">
-                  {user.name ? user.name.charAt(0) : 'U'}
+                  {user?.name ? user.name.charAt(0) : 'U'}
                 </div>
                 <span className="text-xs font-bold text-slate-700 hidden sm:inline max-w-[90px] truncate">
-                  {user.name.split(' ')[0]}
+                  {user?.name ? user.name.split(' ')[0] : 'User'}
                 </span>
                 <ChevronDown size={14} className="text-slate-400" />
               </button>
@@ -178,10 +178,10 @@ const Navbar = () => {
               {userDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50">
                   <div className="px-4 py-2 border-b border-slate-100">
-                    <p className="text-xs font-semibold text-slate-900 truncate">{user.name}</p>
-                    <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
+                    <p className="text-xs font-semibold text-slate-900 truncate">{user?.name || 'Customer'}</p>
+                    <p className="text-[11px] text-slate-500 truncate">{user?.email || ''}</p>
                     <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 uppercase">
-                      {user.role || 'Customer'}
+                      {user?.role || 'Customer'}
                     </span>
                   </div>
 
